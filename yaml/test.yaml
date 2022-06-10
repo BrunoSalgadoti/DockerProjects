@@ -1,0 +1,41 @@
+#Instruções de introdução ao yaml
+nome: "Bruno"
+idade: 40 #Está é a idade do usuário 
+
+#Este objeto descreve o nosso projeto
+objeto:
+  versao: 2
+  arquivo: "teste.txt"
+
+versao: 2 #Usando uma variável do tipo int
+versao_completa: 3.14 #Usando uma variável do tipo float
+
+#variáveis tipo string
+string_sem_aspas: Aceita string sem aspas
+string: "ou com aspas"
+
+#valores nulos
+nulo: ~
+nulo2:
+nulo3: null      
+
+#variáveis tipo booleanos
+verdadeiro: true
+verdadeiro_dois: on  
+falso: false
+false2: off
+
+#2 maneiras de declarar arrays no yaml 
+lista: [1, 2, 3, 4, 5, 6, 7]
+lista2:
+  - "teste"
+  - 10
+  - true
+  - outro teste
+  - off
+
+  #tipo de dados para objetos ou listas com chaves e valores
+obj: {a: 1, b: 2, c: false, objeto_interno: {d: 4, e: 5}}
+obj2: 
+  aluno: passou no teste 
+  nota: 10

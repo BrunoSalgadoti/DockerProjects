@@ -3,5 +3,28 @@
 		{
 			"path": ".."
 		}
-	]
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+		{
+			"name": ".NET Core Attach",
+			"type": "coreclr",
+			"request": "attach"
+		},
+			{
+				"name": "Python: Arquivo Atual",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal",
+				"justMyCode": true
+			}
+		]
+	},
+	"settings": {
+		"yaml.schemas": {
+			"https://json.schemastore.org/cirrus.json": "file:///c%3A/Users/bruno/DockerProjects/yaml/teste.yml"
+		}
+	}
 }
