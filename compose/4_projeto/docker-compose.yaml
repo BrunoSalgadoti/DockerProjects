@@ -6,19 +6,21 @@ services:
     restart: always
     env_file:
       - ./config/db.env
-    ports:
-      - "3306:3306"
+    #ports:
+     # - "3306:3306"
     networks:
       - dockercompose
-
-  backend: 
-    depends_on:
+    volumes:
+      - ./mysql/schema.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  flask:
+    depends_on: 
       - db
     image: flaskcompose
-    ports: 
+    ports:
       - "5000:5000"
     restart: always
-    networks:
+    networks: 
       - dockercompose
 
 networks:

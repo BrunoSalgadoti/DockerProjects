@@ -1,11 +1,11 @@
 FROM python:3
 
 RUN apt-get update -y && \
-apt-get install -y python3-pip python-dev
+  apt-get install -y python3-pip python3-dev
 
-WORKDIR /APP
+WORKDIR /app
 
-RUN pip install flask requests flask_mysqldb
+RUN pip install Flask requests flask_mysqldb
 
 COPY . .
 

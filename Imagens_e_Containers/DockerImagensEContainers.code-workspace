@@ -25,6 +25,7 @@
 	"settings": {
 		"yaml.schemas": {
 			"https://json.schemastore.org/cirrus.json": "file:///c%3A/Users/bruno/DockerProjects/yaml/teste.yml"
-		}
+		},
+		"python.analysis.indexing": false
 	}
 }
