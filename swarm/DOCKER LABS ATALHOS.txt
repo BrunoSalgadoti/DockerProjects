@@ -7,7 +7,7 @@ LIMPA O TERMINAL DO LABS
 ctrl + insert 
 COPIA PARA ÁREA DE TRANSFERENCIA 
 
-CTRL + CHIFT + V 
+CTRL + SHIFT + V 
 COLA O QUE ESTÁ NA ÁREA DE TRANSFERENCIA 
 
 ------------------------------------------------
