@@ -1,0 +1,13 @@
+------------------------------------------------
+DOCKER LABS ATALHOS:
+
+clear 
+LIMPA O TERMINAL DO LABS
+
+ctrl + insert 
+COPIA PARA ÁREA DE TRANSFERENCIA 
+
+CTRL + CHIFT + V 
+COLA O QUE ESTÁ NA ÁREA DE TRANSFERENCIA 
+
+------------------------------------------------

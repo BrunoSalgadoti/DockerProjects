@@ -1,0 +1,134 @@
+COMANDOS DOCKER SWARM:
+
+*INICIANDO NA INSTANCIA O SWAKM
+
+docker swarm init (este comando inicia o swarm como manager node)
+
+OBS: em alguns provedores de hospedagem precisamos colocar o seguinte FLAG para redirecionar o SWARM para a porta de conecção disponível (IP):
+
+docker swarm init --adertise-addr "porta"
+EX: docker swarm init --advertise-addr 1
+
+*SAIR DO SWARM 
+
+docker swarm leave -f
+
+OBS: depois da inicialização do swarm na primeira máquina que automaticamente vira um MANAGER NODE ele te fornecerá um comando para conecção com as outras instancias 
+
+*LISTAR NODES ATIVOS
+
+docker node ls
+OBS: Monitora o que o swarm está orquestrando (os nodes ativos), este comando é de grande utilidade a medida que formos adicionando novos serviços no swarm 
+
+*ADICIONAR NOVOS SERVIÇOS (NODES) (MÁQUINAS)
+
+docker swarm join --token "token" "ip":"porta"
+OBS: desta forma duas máquinas estarão conectadas
+Esta nova máquina entra na hieraquia como worker 
+Todas as ações TASKS utilizadas na MANAGER, serão replicadas em NODES que foram adicionados com JOIN
+
+*SUBINDO UM SERVIÇO PRO SWARM
+
+PODEMOS INICIAR UM SERVIÇO COM O COMANDO: docker service create --name "nome" "imagem"
+DESTA FORMA TEREMOS UM CONTAINER NOVO SENDO ADICIONADO AO NOSSO MANAGER
+E ESTE SERVIÇO ESTARÁ SENDO GERENCIADO PELO SWARM
+PODEMOS TESTAR COM O NGINX, LIBERANDO A PORTA 80 O CONTAINER JÁ PODE SER ACESSADO
+
+docker service create --name "nome" "imagem"
+EX: docker service create --name nginxswarm -p 80:80 nginx
+
+*LISTAR SERVIÇOS RODANDO 
+
+docker service ls
+desta maneira todos os serviços que iniciamos serão exibidos
+algumas informações importantes sobre eles estão na tabela: nome, replica, imagem, porta
+
+*REMOVER SERVIÇOS RODANDO 
+
+docker service rm
+remove o serviço que estiver rodando 
+EX: docker service rm "id do serviço"
+
+*AUMENTANDO O NÚMERO DE RÉPLICAS
+
+PODEMOS CRIAR UM SERVICO COM UM NUMERO MAIOR DE RÉPLICAS 
+DESTA MANEIRA UMA TASK SERÁ EMITIDA, REPLICANDO ESTE SERVIÇO NOS WORKERS
+AGORA É O INÍCIO DE FATO DA ORQUESTRAÇÃO
+PODEMOS CHECAR O STATUS COM: docker service ls
+
+docker service create --name "nome desejado" --replicas "numero de replicas" "nome da imagem" 
+EX: docker service create --name nginxreplicas --replicas 3 nginx
+
+*ADICIONANDO MAIS UM NODE NO MANAGER
+
+QUANDO PRECISARMOS CHECAR O TOKEN DO SWARM PARA DAR UM JOIN EM UM OUTRO NODE ADICIONADO USAMOS:
+
+docker swarm join-token manager
+Desta forma recebemos o token pelo terminal
+
+*CHECANDO O SWARM
+
+Podemos verificar detalhes do SWARM que o docker está utilizando com o comando:
+docker info
+docker service inspec "ID do docker services ls"  <---- inspeciona o node informações de conecções e outras 
+docker service ps "ID do docker services ls"
+
+*FAZER SERVIÇOS NÃO RECEBER MAIS TASKS
+podemos fazer com que um serviço não receba mais 'ordens' do MANAGER;
+utilizndo o comando:
+
+docker node update --availability drain "ID DO NODE" (COM DOCKER NODE LS)
+OBS: ELE FICARÁ COM O STATUS DRAIN 
+
+*ATUALIZAR PARAMETRO (IMAGEM)
+
+docker service update --image "nova imagem" (busca com com docker service ls) "servico da imagem rodando"
+EX: docker service update --image nginx:1.18.0 "pdq76538freg"  
+
+* CRIANDO REDE PARA SWARM
+A conexão entre instâncias usa um drive diferente, o OVERLAY
+Podemos criar primeiramente a rede com: "docker network create"
+E depis criar um service adicionando a flag --network "nome da rede" para inserir as instâncias na nossa nova rede
+
+OBS: principal objetivo de criar outras redes é para isolar serviços
+
+EX: docker network create --drive overlay "nome da rede desejada"
+OBS: usar o docker network ls (para listar as redes e verificar a criação da nova) e depois poderemos criar um service expecificando a nossa rede criada.
+
+EX: docker service create --name nginxreplicas --replicas 3 -p 80:80 --network networkswarm nginx
+
+* CONECTANDO UM SERVIÇO A UMA REDE JÁ CRIADA 
+
+Podemos também conectar serviços que já estão em execução a uma rede
+Vamos utilizar o comando de update: docker service update --network-add "rede" "nome"
+Depois checar o resultado com o inspect
+
+EX: docker service update --network-add swark pklp23849324nfk
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+RODANDO O COMPOSE COM SWARM
+
+Para rodar o COMPOSE com o SWARM vamos utilizar os comandos de STACK:
+docker stack deploy -c "arquivo.yaml" "nome"
+EX: docker stack deploy -c docker-compose.yaml nginx_swarm
+
+REPLICANDO O STACK NOS NODES
+utilizamos o comando:
+docker service scale "nome"="replicas" 
+EX: docker service scale nginx_swarm=3
+
+--------------------------------------------------------------------
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+O QUE É DOCKER SWARM?
+
+Uma ferramenta Docker para orquestração de containers
+
+Podendo escalar horizontalmente nossos projetos de maneira simples, 
+
+O famoso CLUSTER!
+OBS: CLUSTER são várias máquinas em paralelo que criamos e colocamos em um serviço em nuvem como: AWS, AZURE, etc, várias instâncias que estarão sicronizando os nossos projetos mantendo-os atualizados em todas as máquinas em que elas estejam disponíveis (up time) com um serviço de loadbalance que possibilita a disponibilização da nossa aplicação, permitindo que o projeto esteja atualizado em todas as máquinas.  
+
+A facilidade do Swarm para outras orquestrações é que todos os comandos são muito semelhantes ao do Docker
+
+Toda a instalação do Docker já vem com o Swarm,porém, DESABILITADO
+OBS: não precisa instalar nada novo porém habilitar o serviço
+
+
+------------------------------------------------------------------------------
+
+CONCEITOS FUNDAMENTAIS DOS COMANDOS:
+
+NODES: é uma instância (máquina) que participa da Orquestração do Swarm
+OBS: não confundir com Node.js são instâncias da orquestração 
+
+MANAGER NODE: Node que gerencia os demais Nodes
+OBS: os MANAGERS executam TASKS 
+
+WORKER NODE: nodes que trabalham em função do Manager
+OBS: são os que recebem as instruções e replicam para o MANAGER NODE aplicar  (esperando ordem a serem executados)
+
+SERVICE: Um conjunto de tasks que o Manager Node manda o Work Node executar
+OBS: São os containers que estão rodando 
+
+TASK: comandos que são executados nos Nodes 
+OBS: tarefas que são mandadas pelo MANAGER para os WORKES, COMO TAMBÉM OS COMANDO QUE SERÃO REFLETIDOS NOS WORKES, nem todo comando que nós executamos no manager serão uma task apenas os que refletirem para os WORKES.
+
+---------------------------------------------------------------------------------
+OBSERVAÇÃO PARA EXECUTAR O SWARM 
+
+Para exemplificar corretamente o Swarm vamos precisar de Nodes, ou seja, mais máquinas
+
+SOLUÇÕES:
+
+em núvem:
+
+AWS : porém precisa ter cartão de credito para criar conta e entender dos serviços gratuitos da AWS
+DOCKER LABS: gratúito também, roda no navegador (somente para teste) porém EXPIRAM A CADA 4 HORAS
+
+--------------------------------------------------------------------------------------
+
