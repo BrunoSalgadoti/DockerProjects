@@ -1,0 +1,9 @@
+O QUE É KUBERNETES?
+
+Uma ferramenta de orquestração de containers
+Permite a criação de múltiplos containers em diferentes máquinas (modes)
+Escalando projetos, formando um Cluster (arquitetura horizontal)
+Gerencia serviços, garantindo que as aplicações sejam executadas sempre da mesma forma 
+Criada pelo Google
+
+Conhecido também como K8S 

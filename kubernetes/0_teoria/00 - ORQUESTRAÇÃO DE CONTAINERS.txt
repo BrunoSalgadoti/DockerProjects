@@ -1,0 +1,17 @@
+O QUE É ORQUESTRAÇÃO DE CONTAINERS:
+
+Orquestração é o ato de conseguir gerenciar e escalar os containers da nossa aplicação 
+
+Temos um serviço que rege sobre outros serviços, verificando se os mesmos estão funcionando como deveriam
+OBS: Um serviço que fica na máquina mestre, gerenciado pelo container(s) gestor(es) MANAGER 
+
+Desta forma conseguimos garantir uma aplicação saudável e também que esteja sempre disponível
+OBS: se uma máquina der problema há a mesma aplicação rodando em outras máquinas no escalamento horizontal,isso, deixa sempre o serviço sempre rodando (up)
+
+ALGUNS SERVIÇOS:
+Docker Swarm <--- serviço de orquestração do próprio DOCKER
+Kubernetes <---- serviço de orquestração da google (mais antigo no mercado)
+Apache Mesos
+
+OBS: escalamento horizontal (Cluster arquitetura horizontal) múltiplas máquinas rodando o mesmo serviço
+--------------------------------------------------------------------------------

@@ -1,0 +1,19 @@
+CONCEITO FUNDAMENTAIS 
+
+CONTROL PLANE: Onde é gerenciado o controle dos processos dos NODES
+OBS: É um servidor MANAGER de orquestração
+
+NODES: Máquinas que são gerenciadas pelo CONTROL PLANE
+OBS: onde os serviços são replicados (os works)
+
+DEPLOYMENT: A execução de uma imagem/projeto em um POD
+OBS: para criar um projeto criamos primeiramente um Deployment
+
+POD: um ou mais containers que estão em um NODE
+OBS: é um servidor isolado que está rodando um projeto que foi coordenado pelo CONTROL PLANE depois de ser criado pelo DEPLOYMENT
+
+SERVICES: Serviços que expõe os PODS ao mundo externo
+
+KUBECTL: Cliente de linha de comando para o KUBERNETES
+OBS: serviço do KUBERNESTES que dá acesso aos comandos a serem executados no KUBERNETES (linha de comando "terminal")
+

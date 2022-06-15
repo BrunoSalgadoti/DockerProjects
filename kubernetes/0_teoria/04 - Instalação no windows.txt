@@ -1,0 +1,23 @@
+KUBERNETES NO WINDOWS
+
+Primeiramente vamos instalar o gerenciador de pacotes Chocolatey
+Depois seguir a documentação de instalação do client de Kubernetes
+Devemos também instalar o Virtualbox (não é necessário se você tem o Hyper-V ou o Docker instalado)
+E por fim o Minikube
+
+*Chocolatey install
+https://chocolatey.org/install
+
+*Kubernetes
+https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+Comando para instalação:
+choco install kubernetes-cli (digitar no PowerShell como ADM)
+
+Verificar a instalaçãoe versão após instalação:
+kubectl version --client
+
+*Minikube
+https://minikube.sigs.k8s.io/docs/start/
+
+

@@ -1,0 +1,12 @@
+DEPENDENCIAS NECESSÁRIAS
+
+O Kubernetes pode ser executado de uma maneira simples em nossa máquina
+Vamos precisar do client, Kubectl, que é a maneira de executar o KUBERNETES
+E também o Minikube, uma espécie de simulador de Kubernetes, para não precisarmos de vários computadores/serviços
+
+
+DEPENDENCIAS:
+
+*Instalar o KUBENETES NA MÁQUINA (para usar no windows precisamos de gerenciador de pacotes Chocolatey)
+*Kubectl <---- (Instalando o Kubernetes na máquina já está disponibilizada) 
+*Minikube <---- (3 meios de ser usado "pelo docker", "Hyper-V do windows", Vitualbox)

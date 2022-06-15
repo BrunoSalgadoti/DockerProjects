@@ -1,0 +1,40 @@
+COMANDOS E FLGS MINIKUBE
+
+INICIANDO O MINIKUBE
+
+minikube start --driver="DRIVER"
+EX: minikube start --driver=docker  (hyper-v ou virtualbox)
+
+OBS:Onde o drive vai depender de como foi sua instalação das dependências,
+por qualquer um deles atingiremos o mesmo resultado 
+
+TESTANDO O MINIKUBE
+
+minikube status
+
+PARANDO O MINIKUBE 
+
+minikube stop
+OBS: Se o computador for reiniciado mesmo com o minikube no estado START ele dará um STOP automático!!!
+
+ACESSANDO O DASHBOARD DO MINIKUBE para o KUBERNETES
+
+O MINIKUBE nos disponibiliza um DASHBOARD
+Nele podemos ver todo o detalhamento de nosso projeto: serviços, pods, e etc.
+Vamos acessar com o comando:
+
+minikube dashboard
+
+ou
+
+minikube dashboard --url
+OBS: para obter apenas a URL
+
+
+
+
+
+
+--------------------------------------------------
+OBS: O MINIKUBE É SÓ UM SERVIÇO NECESSÁRIO PARA TESTAR A ORQUESTRAÇÃO DE CONTAINERS DO KUBERNETES EM SUA MÁQUINA LOCAL(NÃO FAZ PARTE DO KUBERNETES) SÓ PARA TESTES DE VIRTUALIZAÇÃO DE MÁQUINAS LOCAL 
+--------------------------------------------------

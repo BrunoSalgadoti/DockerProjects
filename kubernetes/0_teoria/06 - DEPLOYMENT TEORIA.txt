@@ -1,0 +1,14 @@
+O QUE É DEPLOYMENT? 
+
+* O Deployment é umna parte fundamental do Kubernetes
+* Com ele criamos nosso serviços que vai rodar nos PODS
+DEFINIMOS UMA IMAGEM E UM NOME, para posteriormente ser replicado entre os servidores
+* A partir da criação do DEPLOYMENT teremos containers rodando
+*Vamos precisar de uma IMAGEM NO HUB DO DOCKER, para gerar um Deployment
+
+OBS: Com o DEPLOYMENT fazemos a inicialização do MANAGER
+A IMAGEM DEVE ESTAR DO DOCKER HUB PARA SER CONECTADO 
+
+
+
+ 
