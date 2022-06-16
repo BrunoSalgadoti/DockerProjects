@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: flask
-          image: brunosalgado/flask-kub-projeto:2
+          image: brunosalgado/flask-kub-projeto:3 # brunosalgado/flask-kub-projeto:2 <--- antes da atualização
