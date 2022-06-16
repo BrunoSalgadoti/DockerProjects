@@ -1,0 +1,133 @@
+COMANDOS NO MODO DECLARATIVO
+
+* EXECUTANDO ARQUIVO DE DEPLOYMENT
+
+Vamos então executar nosso arquivo de Deployment!
+O comando é:
+
+kubectl apply -f "NOME DO ARQUIVO"
+EX: kubectl apply -f flask.yaml
+
+Desta maneira o Deployment será criado conforme configurado no arquivo .yaml
+
+--------------------------------------
+* PARANDO O DEPLOYMENT
+
+Para parar de executar este deployment baseado em arquivo, o declarativo,
+utilizamos também o delete:
+O comando é:
+
+kubectl delete -f "NOME DO ARQUIVO"
+EX: kubectl delete -f flask.yaml
+
+Desta maneira teremos os Pods sendo excluídos e o serviço finalizado.
+
+--------------------------------------
+* CRIANDO SERVIÇO
+
+Criando um serviço no modo DECLARATIVO
+Para isso vamos criar um arquivo "nomedesejado.yaml" para realizar o Service (Kind)
+O arquivo será semelhante ao de Deployment, porém tem uma responsabilidade diferente
+
+EX: flask-service.yaml
+
+EXEMPLO DE UM ARQUIVO SERVICE:
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: flask-service
+spec: 
+  selector:
+    app: flask-app  # <------ link de conexão com o nosso arquivo flask.yaml
+  ports: 
+    - protocol: 'TCP'
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
+-------------------------------------------
+* EXECUTANDO O SERVIÇO
+
+Vamos executar da mesma maneira:
+
+kubectl apply -f "NOME DO ARQUIVO"
+EX: kubectl apply -f "flask-service.yaml"
+
+E o serviço estará disponível 
+OBS: Por estar rodando no minikube precisamos gerar o IP de acesso com :
+
+minikube service "NOME"
+EX: minikube service "flask-service"
+OBS: executar o : minikube tunnel (para ter acesso)
+
+----------------------------------------
+* PARANDO O SERVIÇO
+
+Para parar de executar um serviço baseado em arquivo, o DECLARATIVO,
+utilizamos também o delete
+O comando é: 
+
+kubectl delete -f .\"NOME DO SERVIÇO"
+EX: kubectl delete -f .\flask-service
+
+Desta maneira o serviço não estará mais disponível e perdemos o acesso ao mesmo
+
+----------------------------------------
+* ATUALIZANDO O PROJETO NO DECLARATIVO
+
+Primeiramente vamos criar uma nova versão da imagem
+E fazer o push para o Docker Hub
+Depois é só alterar no arquivo de Deployment a TAG
+E replicar o comando de apply, e pronto!
+
+-------------------------------------------
+* UNINDO ARQUIVOS DO PROJETO
+
+Vamos precisar unir o Deployment e o Service em um arquivo!!!
+A separação de objetos para o YAML é com: ---  INICIA O ARQUIVO  ... TERMINA O ARQUIVO
+Desta forma cada um deles será executado
+Uma boa prática é colocar o SERVICE ANTES DO DEPLOYMENT
+
+
+EXEMPLO DO ARQUIVO UNIDO: Arquivo flask-project.yaml
+
+
+--- # INICIO <----- separação dos arquivos
+apiVersion: v1
+kind: Service
+metadata: 
+  name: flask-service
+spec: 
+  selector:
+    app: flask-app  # <------ link de conexão com o nosso arquivo flask.yaml
+  ports: 
+    - protocol: 'TCP'
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
+... # <---- FIM separação dos arquivos
+--- # INICIO <----- separação dos arquivos
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: flask-app-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: flask-app
+  template: 
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask
+          image: brunosalgado/flask-kub-projeto:3 # brunosalgado/flask-kub-projeto:2 <--- antes da atualização
+... # <---- FIM separação dos arquivos
+
+
+
+
+
+
