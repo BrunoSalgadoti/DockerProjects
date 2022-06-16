@@ -1,0 +1,197 @@
+COMANDOS KUBERNETES
+
+* RODAR UM CONTAINER NO KUBERNETES
+
+kubectl create deployment "NOME IMAGEM" --image="NOME DA IMAGEM" 
+
+EX: kubectl create deployment flask-deployment --image=brunosalgado/flask-kub-projeto 
+OBS:imagem deve estar no HUB do Docker para este teste interno.
+
+OBS: DEPLOYMENT, que é onde rodamos os containers
+das aplicações nos PODS
+
+-------------------------------------------
+* CHECANDO DEPLOYMENT
+
+Podemos checar se tudo foi criado corretamente, tanto o Deployment quanto a recepção do projeto pelo Pod
+Para verificar o Deployment vamos utilizar:
+
+kubectl get deplyments
+OBS: verifica o Deployment existentes
+
+ou
+
+kubectl describe deployments
+OBS: Recebe o retorno com mais detalhes
+
+DESTA FORMA CONSEGUIREMOS SABER SE O PROJETO ESTÁ DE FATO RODANDO E TAMBÉM O QUE ESTÁ RODANDO NELE
+
+--------------------------------------------
+* CHECANDO PODS
+
+Os Pods são componentes muito importantes também, onde os containers realmente são executados
+Para verificar o Pods utilizamos:
+
+kubectl get pods
+OBS: verifica o Pods existentes
+ou
+
+kubectl describe pods
+OBS: Recebe o retorno com mais detalhes
+
+RECEBEMOS O STATUS DOS PODS QUE ESTÃO LIGADOS E TAMBÉM INFORMAÇÕES IMPORTANTES SOBRE ELES
+
+---------------------------------------------
+* VERIFICANDO AS CONFIGURAÇÕES DO KUBERNETES
+
+Podemos verificar como o Kubernetes está configurado
+O comando é:
+
+kubectl config view
+
+No caso deste projeto: vamos receber informações importantes baseadas no MINIKUBE, que é por onde o
+Kubernetes está sendo executado "NESTE CASO"
+
+---------------------------------------------
+* CRIANDO UM SERVICE
+
+Para criar um serviço e expor nossos Pods devemos utilizar o comando:
+
+kubectl expose deployment "NOME" --type="TIPO" --port="PORTA"
+EX: kubectl expose deployment flask-deployment --type=LoadBalancer --port=5000
+
+ver: 10 - SERVICES TEORIA.txt
+
+---------------------------------------------
+* GERANDO UM IP DE ACESSO (DEPOIS DA CRIAÇÃO DO SERVICE)
+
+Podemos acessar o nosso serviço com o comando:
+
+minikube service "NOME"
+EX: minikube service flask-deployment
+
+E depois disponibilizar com o comando:
+
+minikube tunnel
+
+
+Desta forma o IP aparecerá no nosso terminal
+E também uma aba do navegador é aberta com o projeto
+E pront! Temos um projeto rodando pelo Kubernetes!
+
+------------------------------------------------
+*VERIFICANDO OS NOSSOS SERVIÇOS
+
+Podemos também obter detalhes dos Services já criados
+O comando para verificar todos é:
+
+kubectl get services
+
+E podemos obter informações de UM SERVIÇO ESPECÍFICO com:
+
+kubectl describe services/"nome"
+EX: kubectl describe services/flask-deployment 
+
+------------------------------------------------
+* REPLICANDO (ESCALANDO) NOSSA APLICAÇÃO (escalamento de serviços disponibilizando-os em diversas máquina PODS)  
+
+Utilizar outros Pods, replicando assim a nossa aplicação
+O comando é:
+
+kubectl scale deployment/"NOME" --replica="NUMEROS DE REPLICAS"
+EX: kubectl scale deployment/flask-deployment --replicas=5
+
+OBS: Podemos agora verificar no Dashboard o aumento de Pods
+E também como o comando de:
+
+kubectl get pods 
+
+------------------------------------------------
+* CHECAR NÚMERO DE RÉPLICAS (PODS)
+
+Além do get pods e da Dashboard, temos mais um comando para checar réplicas
+Que é o:
+
+kubectl get rs
+
+OBS: Desta maneira temos os status das réplicas dos projetos porque poderemos ter réplicas de diferentes serviços no nosso projeto e com este comando da a DESTINÇÃO DAS REPLICAS 
+
+------------------------------------------------
+* DIMINUIR O NÚMERO DE REPLICAS (PODS)
+
+Podemos facilmente também reduzir o número de Pods
+Esta técnica é chamada de SCALE DOWN
+O comando é o mesmo, porém colocamos um numero de réplicas menor e o Kubernetes faz o resto
+Comando:
+
+kubectl scale deployment/"NOME" --replicas="Um numero menor do existente, desejável"
+EX: 
+ANTES: kubectl scale deployment/flask-deployment --replicas=5 
+DEPOIS: kubectl scale deployment/flask-deployment --replicas=3
+
+------------------------------------------------
+* ATUALIZAR UMA IMAGEM
+
+Para atualizar a imagem vamos precisar do nome do container, isso é dado na Dashboard dentro do pod
+E também a nova imagem deve ser uma outra versão da atual,
+precisamos subir uma NOVA TAG no Docker Hub
+Depois utilizaremos o comando:
+
+kubectl set image deployment/"NOME" "NOME_CONTAINER"="NOVA_IMAGEM"
+EX: kubectl set image deployment/flask-deployment flask-kub-projeto=brunosalgado/flask-kub-projeto:2
+
+------------------------------------------------
+* DESFAZER ALTERAÇÃO
+
+Para desfazer uma alteração (devido algum problema ou outro caso) utilizamos uma ação conhecida
+como ROLLBACK
+O comando para verificar uma alteração é:
+
+kubectl rollout status deployment/"NOME"
+EX: kubectl rollout status deployment/flask-deployment 
+
+Com ele e com o kubectl get pods, podemos identificar problemas
+Para voltar a alteração utilizamos:
+
+kubectl rollout undo deployment/"NOME"
+EX: kubectl rollout undo deployment/flask-deployment
+
+------------------------------------------------
+* DELETAR UM SERVICE
+
+Para deletar um serviço do Kubernetes vamos utilizar o comando:
+
+kubectl delete service "NOME"
+EX: kubectl delete service flask-deployment
+
+Desta maneira nossos PODS não terão mais a conexão externa
+NÃO PODEREMOS MAIS ACESSAR ELES
+
+OBS: só desativa os PODS da externalização, porem, continuam no deployment
+
+------------------------------------------------
+* DELETAR UM DEPLOYMENT
+
+Para deletar um Deployment do Kubernetes vamos utilizar o comando:
+
+kubectl delete deployment "NOME"
+EX:
+
+Desta maneira o container não estará mais rodando, pois paramos os PODS
+OBS: Assim precisaremos criar um deployment novamente com a mesma ou outra imagem,
+para acessar algum projeto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+** O QUE É SERVICES?
+
+SÃO ENTIDADES SEPARADAS DOS PODS PARA EXPOR ELES A UMA REDE
+ESTRUTURA COMPLEMENTAR PARA SER USADA NA HORA DE EXPOR UMA APLICAÇÃO
+
+* As aplicações do Kubernetes não tem conecção com o mundo externo
+* Por isso precisamos criar um Service, que é o que possibilita expor os Pods
+* Isso acontece pois os Pods são criados para serem destruídos e perderem tudo, ou seja, 
+os dados gerados neles também são apagados
+*Então o Service é uma entidade separada dos Pods, que expõe eles a uma rede
+
+OBS: se posteriormente um service for removido o Pod, Deployment não poderá ser mais acessado ele depende do service 
+
+** CRIANDO UM SERVICE
+
+Para criar um serviço e expor nossos Pods devemos utilizar o comando:
+
+kubectl expose deployment "NOME" --type="TIPO" --port="PORTA"
+EX: kubectl expose deployment flask-deployment --type=LoadBalancer --port=5000
+
+OBS: Colocaremos um NOME de um Deployment já criado
+O TIPO de Service, há vários para utilizarmos, porém, o LoadBalancer é o 
+mais comum, onde todos os Pods são expostos
+E uma PORTA para o serviço ser consumido,

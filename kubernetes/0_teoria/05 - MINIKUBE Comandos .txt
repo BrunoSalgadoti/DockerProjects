@@ -30,6 +30,25 @@ ou
 minikube dashboard --url
 OBS: para obter apenas a URL
 
+---------------------------------------------
+* GERANDO UM IP DE ACESSO (DEPOIS DA CRIAÇÃO DO SERVICE NO KUBERNETES)
+
+Podemos acessar o nosso serviço com o comando:
+
+minikube service "NOME"
+EX: minikube service flask-deployment
+
+E depois disponibilizar com o comando:
+
+minikube tunnel
+
+
+Desta forma o IP aparecerá no nosso terminal
+E também uma aba do navegador é aberta com o projeto
+E pront! Temos um projeto rodando pelo Kubernetes!
+
+------------------------------------------------
+
 
 
 

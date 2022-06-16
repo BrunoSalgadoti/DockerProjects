@@ -1,0 +1,10 @@
+DEPLOYMENT
+
+* Rodar o projeto no Kubernetes
+* Para isso vamos precisar de um DEPLOYMENT, que é onde rodamos os containers
+das aplicações  nos PODS
+* O comando é: 
+kubectl create deployment "nome imagem desejada" --image="IMAGEM"
+Desta forma o mini projeto Flask estará sendo orquestrado pelo Kubernetes
+
+
