@@ -4,7 +4,7 @@ O QUE É MODO DECLARATIVO?
 Até agora usamos o modo imperativo, que é quando iniciamos a aplicação com comandos
 O MODO DECLARATIVO é guiado por um arquivo, semelhante ao Docker Compose
 Desta maneira tornamos nossas configurações mais simples e centralizamos tudo em um comando
-Tembém é escrito em YALM o arquivo de KUBERNETES do modo DECLARATIVO
+Tembém é escrito em YAML o arquivo de KUBERNETES do modo DECLARATIVO
 
 ---------------------------------------------
 
