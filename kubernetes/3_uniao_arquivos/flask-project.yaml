@@ -1,0 +1,33 @@
+--- # INICIO <----- separação dos arquivos
+apiVersion: v1
+kind: Service
+metadata: 
+  name: flask-service
+spec: 
+  selector:
+    app: flask-app  # <------ link de conexão com o nosso arquivo flask.yaml
+  ports: 
+    - protocol: 'TCP'
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
+... # <---- FIM separação dos arquivos
+--- # INICIO <----- separação dos arquivos
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: flask-app-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: flask-app
+  template: 
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask
+          image: brunosalgado/flask-kub-projeto:3 # brunosalgado/flask-kub-projeto:2 <--- antes da atualização
+... # <---- FIM separação dos arquivos

@@ -24,7 +24,10 @@
 	},
 	"settings": {
 		"yaml.schemas": {
-			"https://json.schemastore.org/cirrus.json": "file:///c%3A/Users/bruno/DockerProjects/yaml/teste.yml"
+			"https://json.schemastore.org/cirrus.json": [
+				"file:///c%3A/Users/bruno/DockerProjects/yaml/teste.yml",
+				"file:///c%3A/Users/bruno/DockerProjects/kubernetes/3_uniao_arquivos/flask-project.yaml"
+			]
 		},
 		"python.analysis.indexing": false
 	}
